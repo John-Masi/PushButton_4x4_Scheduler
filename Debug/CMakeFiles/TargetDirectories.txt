@@ -1,3 +1,0 @@
-/home/johnmasi/STM32CubeIDE/workspace_2.2.0/WWD/Debug/CMakeFiles/WWD.dir
-/home/johnmasi/STM32CubeIDE/workspace_2.2.0/WWD/Debug/CMakeFiles/edit_cache.dir
-/home/johnmasi/STM32CubeIDE/workspace_2.2.0/WWD/Debug/CMakeFiles/rebuild_cache.dir
