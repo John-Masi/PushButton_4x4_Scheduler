@@ -2,10 +2,10 @@
 
 int keypad_event = 0;
 static const char keymap[4][4] = {
-	    {'1', '2', '3', 'A'},
-	    {'4', '5', '6', 'B'},
-	    {'7', '8', '9', 'C'},
-	    {'*', '0', '#', 'D'}
+	    {' ', ' ', ' ', ' '},
+	    {' ', '^', '^', ' '},
+	    {' ', '<', '>', ' '},
+	    {' ', ' ', ' ', ' '}
 };
 
 void rowsHigh(void) {
@@ -26,34 +26,34 @@ void rowsLow(void)
 }
 
 void KEYPAD_INIT(void) {
-	GPIOA->MODER &= ~(3 << (0 * 2));
-	GPIOA->MODER &= ~(3 << (1 * 2));
-	GPIOA->MODER &= ~(3 << (4 * 2));
-	GPIOA->MODER &= ~(3 << (10 * 2));
-	GPIOA->MODER &= ~(3 << (9 * 2));
 
-	GPIOA->MODER |= (1 << (0 * 2));
-	GPIOA->MODER |= (1 << (1 * 2));
-	GPIOA->MODER |= (1 << (4 * 2));
-	GPIOA->MODER |= (1 << (10 * 2));
-	GPIOA->MODER |= (1 << (9 * 2));
+	CLEAR_BIT(GPIOA->MODER,(9 * 2)); // pin for wired test led
+	CLEAR_BIT(GPIOA->MODER,(0 * 2));
+	CLEAR_BIT(GPIOA->MODER,(1 * 2));
+	CLEAR_BIT(GPIOA->MODER,(4 * 2));
+	CLEAR_BIT(GPIOA->MODER,(10 * 2));
 
-    GPIOA->MODER &= ~(3 << (5 * 2));
-    GPIOA->MODER &= ~(3 << (6 * 2));
-    GPIOA->MODER &= ~(3 << (7 * 2));
-    GPIOA->MODER &= ~(3 << (8 * 2));
+	SET_BIT(GPIOA->MODER,(0 * 2));
+	SET_BIT(GPIOA->MODER,(1 * 2));
+	SET_BIT(GPIOA->MODER,(4 * 2));
+	SET_BIT(GPIOA->MODER,(10 * 2));
 
-    GPIOA->PUPDR &= ~(3 << (5 * 2));
-    GPIOA->PUPDR |=  (1 << (5 * 2));
+	CLEAR_BIT(GPIOA->MODER,(5 * 2));
+	CLEAR_BIT(GPIOA->MODER,(6 * 2));
+	CLEAR_BIT(GPIOA->MODER,(7 * 2));
+	CLEAR_BIT(GPIOA->MODER,(8 * 2));
 
-    GPIOA->PUPDR &= ~(3 << (6 * 2));
-    GPIOA->PUPDR |=  (1 << (6 * 2));
+	CLEAR_BIT(GPIOA->PUPDR,(5 * 2));
+	SET_BIT(GPIOA->PUPDR,(5 * 2));
 
-    GPIOA->PUPDR &= ~(3 << (7 * 2));
-    GPIOA->PUPDR |=  (1 << (7 * 2));
+    CLEAR_BIT(GPIOA->PUPDR,(6 * 2));
+    SET_BIT(GPIOA->PUPDR,(7 * 2));
 
-    GPIOA->PUPDR &= ~(3 << (8 * 2));
-    GPIOA->PUPDR |=  (1 << (8 * 2));
+    CLEAR_BIT(GPIOA->PUPDR,(7 * 2));
+    SET_BIT(GPIOA->PUPDR,(7 * 2));
+
+    CLEAR_BIT(GPIOA->PUPDR,(8 * 2));
+    SET_BIT(GPIOA->PUPDR,(8 * 2));
     rowsLow();
 }
 
