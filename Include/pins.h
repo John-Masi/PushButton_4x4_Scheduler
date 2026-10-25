@@ -40,8 +40,13 @@
 #define DMAR 6
 #define DMAT 7
 
-// DMA PINS
+// DMA1 MASKS FOR CH4 (Channel 4)
+#define CHSEL (0b100 << 25)
+#define MBURST (0b10 << 23)
+#define PL (0b10 << 16) // priority level
+#define MSIZE (0b00 << 13)
+#define PSIZE 12
+#define DIR 6
 
 #endif
-
 
