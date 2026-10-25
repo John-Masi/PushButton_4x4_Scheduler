@@ -60,6 +60,21 @@ typedef struct {
 // STREAM 5 & 6 FOR USART2 TX/RX
 typedef struct {
 	volatile uint32_t r[2];
+	volatile uint32_t r1[30];
+	volatile uint32_t S5CR;
+	volatile uint32_t S5NDTR;
+	volatile uint32_t S5PAR;
+	volatile uint32_t S5M0AR;
+	volatile uint32_t S5M1AR;
+	volatile uint32_t S5FCR;
+
+	volatile uint32_t S6CR;
+	volatile uint32_t S6NDTR;
+	volatile uint32_t S6PAR;
+	volatile uint32_t S6M0AR;
+	volatile uint32_t S6M1AR;
+	volatile uint32_t S6FCR;
+
 
 } DMA_Typedef;
 
@@ -68,6 +83,8 @@ typedef struct {
 	volatile uint32_t DR;
 	volatile uint32_t BRR;
 	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t CR3;
 } USART_Typedef;
 
 typedef struct {
@@ -81,13 +98,18 @@ typedef struct {
 #define EXTI ((EXTI_Typedef *)0x40013C00)
 #define DMA1 ((DMA_Typedef*)0x40026000)
 #define USART2 ((USART_Typedef *)0x40004400)
+#define USART3 ((USART_Typedef *)0x40004800)
+#define USART1 ((USART_Typedef *)0x40011000)
 #define RTC ((RTC_Typedef*)0x40002800)
-#define GPIOD ((GPIO_Typedef*)0x40020C00)
+#define GPIOC ((GPIO_Typedef*)0x40020800)
+#define GPIOA ((GPIO_Typedef *)0x40020000)
 
 
 void EXTI_INIT(void);
 void CLK_INIT(void);
-void USART2_INIT(void);
+void USART1_INIT(void);
 void DMA1_INIT(void);
+void send_char(char c);
+void send_str(const char* str);
 
 #endif
