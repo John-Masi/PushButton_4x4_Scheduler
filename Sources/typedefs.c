@@ -44,7 +44,7 @@ void DMA1_INIT(void) {
 
 }
 
-void USART3_INIT(void) {
+void USART1_INIT(void) {
 
 	GPIOA->MODER &= ~(3 << (2 * 9));
 	GPIOA->MODER &= ~(3 << (2 * 10));
