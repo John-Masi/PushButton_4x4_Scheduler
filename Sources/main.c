@@ -112,6 +112,7 @@ int main(void) {
 	CLK_INIT();
 	KEYPAD_INIT();
 	EXTI_INIT();
+	USART1_INIT();
 	dispatch();
 
 }
