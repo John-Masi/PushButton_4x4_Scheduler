@@ -28,7 +28,8 @@
 
 enum EVENT {
 	READKEY = 0,
-	NONE = 1,
+	SENDSTR = 1,
+	NONE = 2,
 };
 
 void noEvent(void) {
@@ -97,8 +98,49 @@ void EXTI9_5_IRQHandler(void) {
 	}
 }
 
+int tx_head = 0;
+int tx_tail = 0;
+char tx_buffer[32];
+
+void send_str(const char* str) {
+
+	while(*str) {
+
+		while(tx_head == tx_tail){
+
+		}
+
+		tx_head = (tx_head + 1) % 32;
+		tx_buffer[tx_head] = *str;
+
+		str++;
+	}
+
+	USART1->CR1 |= (1 << 7);
+}
+
+void USART1_IRQHandler(void) {
+	if(USART1->SR & (1 << 7)) {
+		if(tx_tail != tx_head){
+			USART1->DR = tx_buffer[tx_tail];
+			tx_tail = (tx_tail + 1) & 32;
+
+		}
+		else {
+			USART1->CR1 &= ~(1 << 7);
+		}
+	}
+}
+
+int send = 1;
+
 void dispatch(void) {
 	while(1) {
+
+		send_str("Test");
+		for(volatile uint32_t i = 0; i < 1000000; i++);
+
+
 		if(!isEmpty()) {
 			enum EVENT event = consume();
 
@@ -110,8 +152,8 @@ void dispatch(void) {
 
 int main(void) {
 	CLK_INIT();
-	KEYPAD_INIT();
-	EXTI_INIT();
+	//KEYPAD_INIT();
+	//EXTI_INIT();
 	USART1_INIT();
 	dispatch();
 
