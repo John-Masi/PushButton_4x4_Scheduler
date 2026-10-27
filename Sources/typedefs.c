@@ -63,17 +63,3 @@ void USART1_INIT(void) {
 	USART1->CR1 |= (1 << TE);
 	USART1->CR1 |= (1 << UEN);
 }
-
-void send_char(char c) {
-	while(!(USART1->SR & (1 << 7)));
-	USART1->DR = c;
-}
-
-void send_str(const char* str) {
-
-	while(*str) {
-		send_char(*str);
-		str++;
-	}
-}
-
