@@ -109,7 +109,5 @@ void EXTI_INIT(void);
 void CLK_INIT(void);
 void USART1_INIT(void);
 void DMA1_INIT(void);
-void send_char(char c);
-void send_str(const char* str);
 
 #endif
